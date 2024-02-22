@@ -6,10 +6,30 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: send custom message with args
-      uses: appleboy/discord-action@master
-      with:
-        webhook_id: ${{ secrets.WEBHOOK_ID }}
-        webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-        args: The ${{ github.event_name }} event triggered first step.
+      - name: Notify Success
+        id: notify-success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2.1.2
+        env:
+          MSG_MINIMAL: actions url, commit
+          SLACK_COLOR: "#3278BD"
+          SLACK_ICON: ${{ github.event.organization.avatar_url }}
+          SLACK_MESSAGE: ${{ env.SUCCESS_MESSAGE }}
+          SLACK_TITLE: ${{ format('{0} Deploy Succeded', env.STAGE) }}
+          SLACK_USERNAME: ${{ format('{0} {1}', env.REPO_NAME, env.STAGE) }}
+          SLACK_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          SLACK_FOOTER: ""
+
+      - name: Notify Failure
+        id: notify-failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2.1.2
+        env:
+          MSG_MINIMAL: actions url, commit
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: ${{ github.event.organization.avatar_url }}
+          SLACK_MESSAGE: ${{ format('Build {0}, Deploy {1}', steps.deploy.outcome, steps.deploy.outcome) }}
+          SLACK_TITLE: ${{ format('{0} Deploy Failed', env.STAGE) }}
+          SLACK_USERNAME: ${{ format('{0} {1}', env.REPO_NAME, env.STAGE) }}
+          SLACK_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          SLACK_FOOTER: ""
