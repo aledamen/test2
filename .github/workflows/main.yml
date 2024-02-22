@@ -11,4 +11,3 @@ jobs:
         uses: aledamen/webhook-notifications@v0.1
         with:
           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
