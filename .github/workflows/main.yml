@@ -8,6 +8,6 @@ jobs:
     steps:
       - name: webhook-notifications
         id: webhook-notifications
-        uses: aledamen/webhook-notifications@v0.7
+        uses: aledamen/webhook-notifications@v0.8
         with:
           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
