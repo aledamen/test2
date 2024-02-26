@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: webhook-notifications
         id: webhook-notifications
-        uses: aledamen/webhook-notifications@v0.29
+        uses: aledamen/webhook-notifications@v0.30
         with:
           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message-color: "#3278BD"
