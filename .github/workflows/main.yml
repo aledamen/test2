@@ -16,4 +16,4 @@ jobs:
           message-action-title : Actions URL
           message-action-name:
           message-body-title: ${{ format('{0} Deploy Succeded', env.STAGE) }}
-          message-body-text: ${{ format('{0}{1}', env.SUCCESS_MESSAGE, env.COMMIT_MESSAGE) }}
+          message-body-text: ${{ format('{0}', env.SUCCESS_MESSAGE) }}
