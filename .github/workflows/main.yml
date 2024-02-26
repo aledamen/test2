@@ -1,15 +1,5 @@
 name: discord message
-on: 
-  workflow_dispatch:
-    inputs:
-      message:
-        description: "message for log"
-        required: true
-        default: "Testing CI"
-  push:
-    branches: [dev, main]
-  pull_request:
-    branches: [dev, main]
+on: [push]
 jobs:
   build:
     name: Build
@@ -17,7 +7,7 @@ jobs:
     steps:
       - name: webhook-notifications
         id: webhook-notifications
-        uses: aledamen/webhook-notifications@v0.41
+        uses: aledamen/webhook-notifications@v0.42
         with:
           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message-color: "#3278BD"
