@@ -7,11 +7,13 @@ jobs:
     steps:
       - name: webhook-notifications
         id: webhook-notifications
-        uses: aledamen/webhook-notifications@v0.43
+        uses: aledamen/webhook-notifications@v0.44
         with:
           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message-color: "#3278BD"
           message-icon: ${{ github.event.organization.avatar_url }}
           message-username: ${{ format('{0} {1}', env.REPO_NAME, env.STAGE) }}
-          message-title: ${{ format('{0} Deploy Succeded', env.STAGE) }}
-          message-text: ${{ format('{0}{1}', env.SUCCESS_MESSAGE, env.COMMIT_MESSAGE) }}
+          message-action-title : Actions URL
+          message-action-name:
+          message-body-title: ${{ format('{0} Deploy Succeded', env.STAGE) }}
+          message-body-text: ${{ format('{0}{1}', env.SUCCESS_MESSAGE, env.COMMIT_MESSAGE) }}
