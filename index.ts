@@ -1,1 +1,1 @@
-console.log("hello world daily moon")
+console.log("hello world")
